@@ -1,0 +1,13 @@
+# Large public raw data — download from source (see README), not tracked
+TCGA-THCA.htseq_counts.tsv
+GSE33630.txt.gz
+gse193581_raw/
+
+# Personal drafts (not part of the published code/methods)
+Research proposal.docx
+*.Rmd
+
+# OS / Python cruft
+.DS_Store
+__pycache__/
+*.pyc
