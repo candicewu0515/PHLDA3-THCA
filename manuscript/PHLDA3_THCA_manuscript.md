@@ -1,10 +1,10 @@
 # PHLDA3 marks aggressive driver-defined thyroid carcinoma: an integrated multi-omics and single-cell analysis
 
-[Author Name]<sup>1</sup>
+Candice Wu<sup>1</sup>
 
-<sup>1</sup>[Department/Unit, Institution, City, Country]
+<sup>1</sup>Department of Internal Medicine, Carver College of Medicine, University of Iowa, Iowa City, IA, USA
 
-**Corresponding author:** [Author Name], [Department/Unit, Institution, full postal address]. Email: candicewu0515@gmail.com
+**Corresponding author:** Candice Wu, Department of Internal Medicine, Carver College of Medicine, University of Iowa, Iowa City, IA, USA. Email: xwu76@uiowa.edu
 
 *Running head:* PHLDA3 marks driver-defined thyroid carcinoma
 
@@ -110,7 +110,7 @@ The author thanks the TCGA Research Network, the Genotype-Tissue Expression (GTE
 
 ## Author Contributions
 
-[Author Name]: Conceptualization; Data curation; Formal analysis; Investigation; Methodology; Software; Validation; Visualization; Writing – original draft; Writing – review and editing. As the sole author, the author conceived and designed the study, performed all analyses, and wrote the manuscript.
+Candice Wu: Conceptualization; Data curation; Formal analysis; Investigation; Methodology; Software; Validation; Visualization; Writing – original draft; Writing – review and editing. As the sole author, the author conceived and designed the study, performed all analyses, and wrote the manuscript.
 
 ## Statements and Declarations
 
@@ -128,7 +128,7 @@ The author thanks the TCGA Research Network, the Genotype-Tissue Expression (GTE
 
 ## ORCID iD
 
-[Author Name] https://orcid.org/0000-0000-0000-0000
+Candice Wu https://orcid.org/0009-0006-9852-812X
 
 ## References
 
