@@ -21,3 +21,5 @@ Research proposal.docx
 .DS_Store
 __pycache__/
 *.pyc
+data/thca_fusions_raw.json
+data/thca_mut_*.json
