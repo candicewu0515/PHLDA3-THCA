@@ -29,20 +29,16 @@ axA.axvline(0, color=ns.C["grey_mid"], lw=.6, ls="--")
 axA.set_xlabel("log2 fold-change (tumour vs normal)", fontsize=6.5); axA.set_ylabel("−log10 FDR", fontsize=6.5)
 axA.set_title("TCGA-THCA differential expression", fontweight="bold", fontsize=7.5); axA.spines[["top","right"]].set_visible(False)
 
-# (b) pan-cancer tumour-vs-normal delta, THCA highlighted
-pc = pd.read_csv("data/pancancer_phlda3_raw.csv")
-tum = pc[pc.stype=="Primary Tumor"].groupby("site").PHLDA3.median()
-nor = pc[pc.stype.isin(["Normal Tissue","Solid Tissue Normal"])].groupby("site").PHLDA3.median()
-common = tum.index.intersection(nor.index)
-delta = (tum[common]-nor[common]).sort_values()
-delta = delta.dropna()
-cols = [ns.C["tumor"] if s=="Thyroid" else ns.C["ns"] for s in delta.index]
-axB.barh(range(len(delta)), delta.values, color=cols, ec="black", lw=.3)
-axB.set_yticks(range(len(delta))); axB.set_yticklabels(delta.index, fontsize=5.2)
+# (b) pan-cancer tumour-vs-normal delta, THCA highlighted (disease-paired stats cache)
+pc = pd.read_csv("data/PHLDA3_pancancer_stats.csv").sort_values("fc").reset_index(drop=True)
+cols = [ns.C["tumor"] if a=="THCA" else ns.C["ns"] for a in pc.abbr]
+axB.barh(range(len(pc)), pc.fc.values, color=cols, ec="black", lw=.3)
+axB.set_yticks(range(len(pc))); axB.set_yticklabels(pc.abbr, fontsize=5.2)
 for lbl in axB.get_yticklabels():
-    if lbl.get_text()=="Thyroid": lbl.set_color(ns.C["tumor"]); lbl.set_fontweight("bold")
+    if lbl.get_text()=="THCA": lbl.set_color(ns.C["tumor"]); lbl.set_fontweight("bold")
+rank = pc.sort_values("fc",ascending=False).reset_index(drop=True).index[pc.sort_values("fc",ascending=False).reset_index(drop=True).abbr=="THCA"][0]+1
 axB.axvline(0, color="black", lw=.6); axB.set_xlabel("Δ median PHLDA3 (tumour − normal)", fontsize=6.5)
-axB.set_title("Pan-cancer over-expression", fontweight="bold", fontsize=7.5); axB.spines[["top","right"]].set_visible(False)
+axB.set_title(f"Pan-cancer over-expression (THCA rank {rank}/{len(pc)})", fontweight="bold", fontsize=7.5); axB.spines[["top","right"]].set_visible(False)
 
 # (c) external GSE33630
 geo = pd.read_csv("data/PHLDA3_GSE33630.csv")
