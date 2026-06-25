@@ -1,68 +1,57 @@
 # PHLDA3 in Thyroid Carcinoma (THCA)
 
-Reproducible analysis code and figures for the study:
+Reproducible code, figures and manuscript for:
 
-> **PHLDA3 is induced in thyroid carcinoma cells and is an independent predictor of lymph-node metastasis and advanced stage: an integrated multi-cohort and single-cell analysis.**
+> **An integrated multi-omics and single-cell bioinformatics analysis identifies PHLDA3 as a BRAF-associated transcriptomic marker linked to lymph-node metastasis in thyroid carcinoma.**
 
-PHLDA3 — a p53 target and AKT repressor — is over-expressed in thyroid carcinoma, discriminates tumour from normal tissue in two independent cohorts, independently predicts lymph-node metastasis and advanced stage, tracks with the BRAF^V600E^ subtype and an immunosuppressive microenvironment, and is induced cell-intrinsically in malignant thyroid cells at single-cell resolution.
+PHLDA3 (a p53 target / AKT repressor) is induced cell-intrinsically in malignant thyroid cells — associated with promoter hypomethylation within a BRAF^V600E^/p53-driven, immunosuppressive context — and independently correlates with lymph-node metastasis (robust to BRAF adjustment).
 
-The full manuscript draft is in [`PHLDA3_THCA_manuscript.md`](PHLDA3_THCA_manuscript.md).
+## Repository layout
+
+```
+data/         # downloaded raw data + intermediate caches (large raw files git-ignored)
+code/         # analysis scripts (Python + R) and the shared figure theme (nature_style.py)
+figures/      # result figures (PDF)
+manuscript/   # PHLDA3_THCA_manuscript.md
+README.md · requirements.txt · .gitignore
+```
+
+**Run scripts from the repository root**, e.g. `python3 code/volcano_thca.py` or `Rscript code/run_estimate.R`. Scripts read inputs from `data/` and write figures to `figures/`.
 
 ## Environment
 
-Python 3.13.11. Install dependencies:
+Python 3.13.11 (`pip install -r requirements.txt`) and R 4.5 (packages: `estimate`; optional `infercnv`/`CellChat`). Key Python versions: pandas 2.3.3, numpy 2.4.4, scipy 1.17.1, matplotlib 3.10.9, scikit-learn 1.8.0, statsmodels 0.14.6, lifelines 0.30.3, gseapy 1.3.0, pingouin 0.6.1, xenaPython 1.0.14, cellxgene-census 1.18.0.
 
-```bash
-pip install -r requirements.txt
-```
-
-Key versions: pandas 2.3.3, numpy 2.4.4, scipy 1.17.1, matplotlib 3.10.9, scikit-learn 1.8.0, statsmodels 0.14.6, lifelines 0.30.3, gseapy 1.3.0, cellxgene-census 1.18.0, xenaPython 1.0.14.
-
-## Data sources
-
-Large raw files are **not** tracked in this repository (size / public availability). Download them into the repository root before running the from-scratch scripts:
+## Data (large raw files not tracked — download into `data/`)
 
 | File / source | Used by | Download |
 |---|---|---|
-| `TCGA-THCA.htseq_counts.tsv` (HTSeq counts) | most scripts | GDC / UCSC Xena (TCGA-THCA) |
-| `THCA_clinical.tsv` (tracked) | clinical scripts | GDC |
-| `GSE33630.txt.gz` (series matrix) | `geo_validation_thca.py` | [GEO GSE33630](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE33630) |
-| `gse193581_raw/` (per-sample UMI matrices from `GSE193581_RAW.tar`) | `sc_tumor_phlda3.py` | [GEO GSE193581](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE193581) |
-| Pan-cancer TCGA+GTEx | `pancancer_phlda3.py` (auto-fetch) | UCSC Xena Toil hub (via `xenaPython`) |
-| Somatic mutations | `braf_ras_thca.py` (auto-fetch) | cBioPortal API (`thca_tcga_pan_can_atlas_2018`) |
-| Normal-thyroid scRNA | `sc_normal_census.py` (auto-fetch) | CELLxGENE Census 2025-11-08 |
-| Protein IHC images (tracked) | `hpa_ihc_thca.py` | Human Protein Atlas (ENSG00000174307) |
+| `TCGA-THCA.htseq_counts.tsv`, `THCA_clinical.tsv` | most scripts | GDC / UCSC Xena |
+| `TCGA-THCA.methylation450.tsv.gz`, `TCGA-THCA.mirna.tsv.gz` | methylation / miRNA | UCSC Xena (GDC hub) |
+| `GSE33630.txt.gz` | `geo_validation_thca.py` | [GEO GSE33630](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE33630) |
+| `gse193581_raw/` + `gse193581_anno.txt.gz` | tumour single-cell | [GEO GSE193581](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE193581) |
+| `gdsc2/*.rds` | `run_gdsc2.R` | oncoPredict data (OSF c6tfx) |
+| pan-cancer / mutations / census / ENCORI / L1000CDS2 | auto-fetch | UCSC Xena · cBioPortal · CELLxGENE · ENCORI · L1000CDS2 |
 
-Intermediate caches that **are** tracked (so cache-based figures reproduce without large downloads): `thca_DE_full.csv`, `thca_DE_full_symbol.csv`, `pancancer_phlda3_raw.csv`, `thyroid_sc_phlda3.csv`, `PHLDA3_tumor_sc.csv`, and all result tables.
+Tracked intermediate caches (so cache-based figures reproduce without large downloads): `data/thca_DE_full_symbol.csv`, `data/pancancer_phlda3_raw.csv`, `data/thyroid_sc_phlda3.csv`, `data/PHLDA3_tumor_sc.csv`, `data/PHLDA3_cmap_moa_clean.csv`, `data/gdsc2_phlda3_drugcorr.csv`, etc.
 
-## Figures → scripts
+## Analyses (figure → script)
 
-| Figure | Script | Theme/style |
-|---|---|---|
-| 1 — diagnostic (volcano, tumour-vs-normal ROC, pan-cancer) | `volcano_thca.py`, `build_phlda3.py`, `pancancer_phlda3.py` | |
-| 2 — external + protein validation | `geo_validation_thca.py`, `hpa_ihc_thca.py` | |
-| 3 — clinicopathological associations | `clinical_phlda3.py` | |
-| 4 — logistic regression + nomogram/DCA | `logistic_phlda3.py`, `nomogram_dca_thca.py` | |
-| 5 — BRAF/RAS driver mutations | `braf_ras_thca.py` | |
-| 6 — co-expression GO/KEGG/GSEA | `coexpr_enrich_thca.py` | |
-| 7 — immune infiltration + checkpoints | `immune_thca.py` | |
-| 8 — single-cell (normal vs tumour) | `combined_singlecell_nature.py` | Nature-style |
+| Manuscript figure | Script |
+|---|---|
+| Expression / validation / pan-cancer | `volcano_thca.py`, `build_phlda3.py`, `pancancer_phlda3.py`, `geo_validation_thca.py` |
+| N1 logistic + BRAF sensitivity + nomogram | `logistic_phlda3.py`, `braf_sensitivity_thca.py`, `nomogram_dca_thca.py` |
+| BRAF/RAS drivers | `braf_ras_thca.py` |
+| Mechanism (CNV + methylation) | `cnv_phlda3.py`, `meth_phlda3.py` |
+| Co-expression GO/KEGG/GSEA | `coexpr_enrich_thca.py` |
+| Immune + purity correction | `immune_thca.py`, `purity_partialcorr_thca.py` (+ `run_estimate.R`) |
+| miRNA / ceRNA | `mirna_phlda3.py`, `cerna_phlda3.py` |
+| Drug repurposing | `l1000cds2_phlda3.py`, `run_gdsc2.R` + `gdsc2_phlda3.py`, `cmap_clean_phlda3.py` |
+| Single cell (tumour + p53 module) | `sc_tumor_phlda3.py`, `sc_p53_module_thca.py`, `combined_singlecell_nature.py` |
+| Protein (HPA) | `hpa_ihc_thca.py` |
 
-All figures share one palette/theme defined in [`nature_style.py`](nature_style.py) and are exported as SVG (editable), PDF, 600-dpi TIFF and PNG.
-
-Upstream helpers: `screen_thca.py` (tumour-vs-normal DE screen → `thca_DE_full.csv`), `map_de_symbols.py` (Ensembl→symbol), `sc_normal_census.py` (normal-thyroid scRNA fetch), `sc_tumor_phlda3.py` (tumour scRNA → `PHLDA3_tumor_sc.csv`).
-
-## Reproduce (cache-based figures, no large downloads)
-
-```bash
-pip install -r requirements.txt
-python3 volcano_thca.py             # Fig 1a
-python3 pancancer_phlda3.py         # Fig 1c   (auto-fetches via xenaPython)
-python3 combined_singlecell_nature.py   # Fig 8
-```
-
-For the remaining figures, download the raw files listed above, then run the corresponding scripts.
+Upstream helpers: `screen_thca.py` (DE screen), `map_de_symbols.py` (Ensembl→symbol), `sc_normal_census.py` (normal-thyroid scRNA fetch). All figures share `code/nature_style.py` (Arial, unified palette, PDF export).
 
 ## Data availability / attribution
 
-TCGA (GDC), GEO (GSE33630, GSE193581), UCSC Xena, cBioPortal, Human Protein Atlas, and CZI CELLxGENE Census are publicly available; please cite the original data producers and methods papers listed in the manuscript references.
+TCGA (GDC), GEO, UCSC Xena, cBioPortal, Human Protein Atlas, ENCORI, L1000CDS2, GDSC2 (oncoPredict) and CELLxGENE Census are publicly available; cite the original data producers and methods papers listed in the manuscript.

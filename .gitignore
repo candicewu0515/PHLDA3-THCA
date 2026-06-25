@@ -1,29 +1,23 @@
-# Large public raw data — download from source (see README), not tracked
-TCGA-THCA.htseq_counts.tsv
-GSE33630.txt.gz
-gse193581_raw/
+# Large raw / intermediate data (regenerate from source; see README) — under data/
+data/TCGA-THCA.htseq_counts.tsv
+data/TCGA-THCA.methylation450.tsv.gz
+data/TCGA-THCA.mirna.tsv.gz
+data/GSE33630.txt.gz
+data/gse193581_raw/
+data/gdsc2/
+data/oncopredict_DataFiles.zip
+data/clue_result.tar.gz
+data/estimate_input.tsv
+data/estimate_filtered.gct
+data/estimate_scores.gct
 
-# Personal drafts (not part of the published code/methods)
+# Personal drafts
 Research proposal.docx
 *.Rmd
 
-# OS / Python cruft
+# Junk
+*.parquet
+*.log
 .DS_Store
 __pycache__/
 *.pyc
-
-# Large raw/intermediate data added in extension analyses (regenerate from source)
-TCGA-THCA.methylation450.tsv.gz
-TCGA-THCA.mirna.tsv.gz
-oncopredict_DataFiles.zip
-gdsc2/
-clue_result.tar.gz
-estimate_input.tsv
-estimate_filtered.gct
-estimate_scores.gct
-
-# Large / junk outputs
-*.parquet
-*.log
-results/.DS_Store
-results/06_cache
