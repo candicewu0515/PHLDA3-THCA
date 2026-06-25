@@ -49,14 +49,17 @@ axb.set_xticks([1,2,3]); axb.set_xticklabels([x[1] for x in gb],fontsize=6.5)
 axb.set_ylabel("PHLDA3 (log CP10k)"); axb.set_title("Malignant vs normal (cell level)",fontweight="bold",fontsize=7.5)
 axb.spines[["top","right"]].set_visible(False)
 
-# (c) PHLDA3 vs p53 module in malignant cells
+# (c) PHLDA3 vs p53 module in malignant cells — cell-level scatter + sample-level pseudobulk
 m=p53[p53.celltype=="Malignant cell"]; rho,_=spearmanr(m.PHLDA3,m.p53)
+pb=m.groupby("sample").agg(PHLDA3=("PHLDA3","mean"),p53=("p53","mean"),n=("PHLDA3","size"))
+pb=pb[pb.n>=20]; rho_pb,p_pb=spearmanr(pb.PHLDA3,pb.p53)
 ms=m.sample(min(6000,len(m)),random_state=0)
-axc.scatter(ms.p53,ms.PHLDA3,s=2,color=ns.C["tumor"],alpha=.15,ec="none")
+axc.scatter(ms.p53,ms.PHLDA3,s=2,color=ns.C["ns"],alpha=.18,ec="none")          # cells (descriptive)
 b,a=np.polyfit(m.p53,m.PHLDA3,1); xs=np.linspace(m.p53.min(),m.p53.max(),40)
-axc.plot(xs,b*xs+a,color="black",lw=1.1)
+axc.plot(xs,b*xs+a,color="black",lw=.8,ls=":")
+axc.scatter(pb.p53,pb.PHLDA3,s=26,color=ns.C["tumor"],ec="black",lw=.5,zorder=4) # one point per sample
 axc.set_xlabel("p53-target module score"); axc.set_ylabel("PHLDA3 (log CP10k)")
-axc.set_title(f"Malignant cells: PHLDA3 vs p53 (r={rho:.2f})",fontweight="bold",fontsize=7.5)
+axc.set_title(f"Malignant: cell r={rho:.2f}; sample r={rho_pb:.2f} (P={p_pb:.3f})",fontweight="bold",fontsize=7)
 axc.spines[["top","right"]].set_visible(False)
 
 # (d) PHLDA3-p53 coupling by cell type
