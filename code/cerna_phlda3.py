@@ -65,7 +65,7 @@ ax.text(xL,len(mids)+0.2,"lncRNA (ceRNA)\n+corr with PHLDA3",ha="center",fontsiz
 ax.text(xM,len(mids)+0.2,"miRNA\n(AGO2-CLIP, repressor)",ha="center",fontsize=7.5,fontweight="bold",color=ns.C["accent"])
 ax.text(xR,len(mids)+0.2,"target",ha="center",fontsize=7.5,fontweight="bold",color=ns.C["highlight"])
 ax.set_xlim(-0.7,2.5); ax.set_ylim(-0.7,len(mids)+0.7); ax.axis("off")
-ax.set_title("PHLDA3 ceRNA network: lncRNA — miRNA — PHLDA3\n(TCGA-THCA + ENCORI AGO2-CLIP)",
+ax.set_title("PHLDA3 candidate ceRNA network (exploratory)\nlncRNA — miRNA — PHLDA3\n(TCGA-THCA + ENCORI AGO2-CLIP)",
              fontweight="bold", fontsize=10)
 plt.tight_layout()
 ns.save_fig(fig, "PHLDA3_THCA_cerna")
