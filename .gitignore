@@ -24,3 +24,4 @@ __pycache__/
 data/thca_fusions_raw.json
 data/thca_mut_*.json
 submission_upload/
+submission_upload_nonfigure/
