@@ -1,0 +1,2 @@
+n_malignant,spearman_rho,spearman_p,p53prog_PHLDA3pos_mean,p53prog_PHLDA3neg_mean,MWU_p_pos_gt_neg,n_p53_genes
+16049,0.3215499239510259,0.0,0.3578869274569842,0.2565078085350047,0.0,32

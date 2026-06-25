@@ -80,10 +80,7 @@ for ax, lab in zip(axes, ["a", "b"]):
 
 # ── export: editable SVG/PDF + 600-dpi TIFF ────────────────────────────────
 base = "PHLDA3_THCA_singlecell_combined_nature"
-fig.savefig(f"{base}.svg", bbox_inches="tight")
-fig.savefig(f"{base}.pdf", bbox_inches="tight")
-fig.savefig(f"{base}.tiff", dpi=600, bbox_inches="tight", pil_kwargs={"compression":"tiff_lzw"})
-fig.savefig(f"{base}.png", dpi=600, bbox_inches="tight")
+fig.savefig(f"{base}.pdf", bbox_inches="tight")   # PDF only (submission vector)
 plt.close(fig)
 print("follicular (normal) %:", round(gn.loc[gn.celltype=='thyroid follicular cell','pct'].iloc[0],2))
 print("malignant (tumour)  %:", round(gt.loc[gt.celltype=='Malignant cell','pct'].iloc[0],2))

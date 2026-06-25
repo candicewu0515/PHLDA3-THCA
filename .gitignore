@@ -11,3 +11,19 @@ Research proposal.docx
 .DS_Store
 __pycache__/
 *.pyc
+
+# Large raw/intermediate data added in extension analyses (regenerate from source)
+TCGA-THCA.methylation450.tsv.gz
+TCGA-THCA.mirna.tsv.gz
+oncopredict_DataFiles.zip
+gdsc2/
+clue_result.tar.gz
+estimate_input.tsv
+estimate_filtered.gct
+estimate_scores.gct
+
+# Large / junk outputs
+*.parquet
+*.log
+results/.DS_Store
+results/06_cache

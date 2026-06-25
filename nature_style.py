@@ -62,11 +62,13 @@ def panel_label(ax, lab, x=-0.12, y=1.04, fs=11):
     ax.text(x, y, lab, transform=ax.transAxes, fontsize=fs, fontweight="bold",
             va="bottom", ha="left")
 
-def save_fig(fig, base, dpi=600):
-    """Editable SVG/PDF + 600-dpi LZW TIFF + PNG preview."""
-    fig.savefig(f"{base}.svg", bbox_inches="tight")
-    fig.savefig(f"{base}.pdf", bbox_inches="tight")
-    fig.savefig(f"{base}.tiff", dpi=dpi, bbox_inches="tight",
-                pil_kwargs={"compression": "tiff_lzw"})
-    fig.savefig(f"{base}.png", dpi=dpi, bbox_inches="tight")
-    print(f"saved: {base}.svg/.pdf/.tiff/.png")
+def save_fig(fig, base, dpi=600, formats=("pdf",)):
+    """Submission figure export. Default: PDF only (editable vector, submission-
+    ready). Pass formats=("pdf","png") for a preview raster, or add "tiff"/"svg"
+    only if a journal specifically requires them at final submission."""
+    for fmt in formats:
+        kw = {"bbox_inches": "tight"}
+        if fmt in ("png", "tiff"): kw["dpi"] = dpi
+        if fmt == "tiff": kw["pil_kwargs"] = {"compression": "tiff_lzw"}
+        fig.savefig(f"{base}.{fmt}", **kw)
+    print(f"saved: {base}." + "/.".join(formats))

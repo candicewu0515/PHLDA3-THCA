@@ -1,0 +1,9 @@
+celltype,proportion
+Malignant cell,81.2
+Myeloid cell,7.9
+T cell,7.2
+Fibroblast,2.9
+Endothelial cell,0.5
+NK cell,0.2
+B cell,0.1
+Epithelial cell,0.0
