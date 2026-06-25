@@ -2,9 +2,9 @@
 
 Reproducible code, figures and manuscript for:
 
-> **An integrated multi-omics and single-cell bioinformatics analysis identifies PHLDA3 as a BRAF-associated transcriptomic marker linked to lymph-node metastasis in thyroid carcinoma.**
+> **An integrated multi-omics and single-cell bioinformatics analysis identifies PHLDA3 as a transcriptomic marker of aggressive, driver-defined thyroid carcinoma.**
 
-PHLDA3 (a p53 target / AKT repressor) is induced cell-intrinsically in malignant thyroid cells — associated with promoter hypomethylation within a BRAF^V600E^/p53-driven, checkpoint-high immune context — and independently correlates with lymph-node metastasis (robust to BRAF adjustment).
+PHLDA3 (a p53 target / AKT repressor) is induced cell-intrinsically in malignant thyroid cells — associated with promoter hypomethylation within a BRAF^V600E^/p53-driven, checkpoint-high immune context — and is comparably elevated in BRAF^V600E^ and RET/NTRK-fusion-positive tumours; its association with lymph-node metastasis is largely shared with this aggressive driver landscape rather than driver-independent.
 
 ## Repository layout
 

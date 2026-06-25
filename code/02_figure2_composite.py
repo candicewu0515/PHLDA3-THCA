@@ -112,7 +112,7 @@ axD.set_xlabel("Threshold",fontsize=6.5); axD.set_ylabel("Net benefit",fontsize=
 axD.legend(frameon=False,fontsize=5.5,loc="upper right"); axD.spines[["top","right"]].set_visible(False)
 
 for ax,l in zip([axA,axB,axC,axN,axR,axCa,axD],"abcdefg"): ns.panel_label(ax,l,x=-0.18,y=1.05,fs=10)
-fig.suptitle("Figure 2. PHLDA3 independently predicts lymph-node metastasis, including after BRAF adjustment",
+fig.suptitle("Figure 2. PHLDA3 is associated with lymph-node metastasis, an association shared with the aggressive driver landscape",
              fontweight="bold",fontsize=8.5,y=1.005)
 ns.save_fig(fig,"PHLDA3_THCA_Figure2")
 print(f"AUC apparent={auc_app:.2f} CV={auc_cv:.2f}; done Figure 2 composite")
