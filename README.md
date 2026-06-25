@@ -37,20 +37,23 @@ Tracked intermediate caches (so cache-based figures reproduce without large down
 
 ## Analyses (figure → script)
 
-| Manuscript figure | Script |
-|---|---|
-| Expression / validation / pan-cancer | `volcano_thca.py`, `build_phlda3.py`, `pancancer_phlda3.py`, `geo_validation_thca.py` |
-| N1 logistic + BRAF sensitivity + nomogram | `logistic_phlda3.py`, `braf_sensitivity_thca.py`, `nomogram_dca_thca.py` |
-| BRAF/RAS drivers | `braf_ras_thca.py` |
-| Mechanism (CNV + methylation) | `cnv_phlda3.py`, `meth_phlda3.py` |
-| Co-expression GO/KEGG/GSEA | `coexpr_enrich_thca.py` |
-| Immune + purity correction | `immune_thca.py`, `purity_partialcorr_thca.py` (+ `run_estimate.R`) |
-| miRNA / ceRNA | `mirna_phlda3.py`, `cerna_phlda3.py` |
-| Drug repurposing | `l1000cds2_phlda3.py`, `run_gdsc2.R` + `gdsc2_phlda3.py`, `cmap_clean_phlda3.py` |
-| Single cell (tumour + p53 module) | `sc_tumor_phlda3.py`, `sc_p53_module_thca.py`, `combined_singlecell_nature.py` |
-| Protein (HPA) | `hpa_ihc_thca.py` |
+Scripts are numbered by manuscript figure (`0N_` = main Figure N; `SN_` = Supplementary Figure N). Run from the repository root.
 
-Upstream helpers: `screen_thca.py` (DE screen), `map_de_symbols.py` (Ensembl→symbol), `sc_normal_census.py` (normal-thyroid scRNA fetch). All figures share `code/nature_style.py` (Arial, unified palette, PDF export).
+| Manuscript figure | Scripts |
+|---|---|
+| Fig 1 — expression / validation / pan-cancer | `01_volcano.py`, `01_expression_roc.py`, `01_pancancer.py`, `01_geo_validation.py` |
+| Fig 2 — N1 logistic + BRAF sensitivity + nomogram | `02_logistic_n1.py`, `02_braf_sensitivity.py`, `02_nomogram_dca.py` |
+| Fig 3 — BRAF/RAS drivers | `03_braf_ras.py` |
+| Fig 4 — immune + tumour-purity correction | `04_immune.py`, `04_purity_partialcorr.py` (+ `04_run_estimate.R`) |
+| Fig 5 — single cell (tumour, p53 module, cell-cell communication) | `05_sc_tumor.py`, `05_sc_p53_module.py`, `05_sc_combined.py`, `05_sc_liana.py` |
+| S1 — clinicopathology | `S1_clinical.py` |
+| S2 — mechanism (CNV + methylation) | `S2_cnv.py`, `S2_methylation.py` |
+| S3 — co-expression GO/KEGG/GSEA | `S3_enrichment.py` |
+| S4 — miRNA / ceRNA (exploratory) | `S4_mirna.py`, `S4_cerna.py` |
+| S5 — drug repurposing | `S5_l1000cds2.py`, `S5_run_gdsc2.R` + `S5_gdsc2.py`, `S5_cmap.py` |
+| S6 — protein (HPA) | `S6_hpa.py` |
+
+Upstream helpers: `00_de_screen.py` (DE screen), `00_map_symbols.py` (Ensembl→symbol), `00_sc_normal_fetch.py` (normal-thyroid scRNA fetch). All figures share `code/nature_style.py` (Arial, unified palette, PDF export). Independent parallel cross-validation outputs (purity, single-cell incl. LIANA, immune) are kept under `results/`.
 
 ## Data availability / attribution
 

@@ -39,7 +39,7 @@ phl = logcpm.loc[GENE]
 
 # ---------- ESTIMATE purity (R) ----------
 logcpm.rename_axis("GeneSymbol").to_csv("data/estimate_input.tsv", sep="\t")
-subprocess.run(["Rscript","code/run_estimate.R","data/estimate_input.tsv","data/estimate_scores.gct"], check=True)
+subprocess.run(["Rscript","code/04_run_estimate.R","data/estimate_input.tsv","data/estimate_scores.gct"], check=True)
 sc = pd.read_csv("data/estimate_scores.gct", sep="\t", skiprows=2, index_col=0).drop(columns=["Description"])
 sc.columns = [c.replace(".","-") for c in sc.columns]
 est = sc.loc["ESTIMATEScore"]
