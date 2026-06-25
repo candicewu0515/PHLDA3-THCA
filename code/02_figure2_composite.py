@@ -100,7 +100,7 @@ axD.set_title(f"PHLDA3 adds ΔAUC={a_drvg-a_drv:+.3f} over driver status",fontwe
 axD.spines[["top","right"]].set_visible(False)
 
 for ax,l in zip([axA,axB,axC,axD],"abcd"): ns.panel_label(ax,l,x=-0.16,y=1.06,fs=10)
-fig.suptitle("Figure 2. PHLDA3's lymph-node-metastasis association is shared with the aggressive driver landscape",
+fig.suptitle("Figure 2. PHLDA3's lymph-node-metastasis association is shared with the kinase-driver landscape",
              fontweight="bold",fontsize=8,y=1.0)
 ns.save_fig(fig,"PHLDA3_THCA_Figure2")
 print(f"done Figure 2 (driver-aware); driver-aware AUC {a_drv:.3f} -> +PHLDA3 {a_drvg:.3f}")

@@ -69,11 +69,11 @@ for k in order: s=dd[dd["class"]==k]; axD.scatter(s.meth,s[GENE],s=12,color=COL[
 b,a=np.polyfit(dd.meth,dd[GENE],1); xs=np.linspace(dd.meth.min(),dd.meth.max(),40)
 axD.plot(xs,b*xs+a,color="black",lw=1,ls=":")
 axD.set_xlabel("cg04055835 β (promoter methylation)",fontsize=6.5); axD.set_ylabel(f"{GENE} log2(CPM+1)",fontsize=6.5)
-axD.set_title(f"Aggressive classes: high PHLDA3, low methylation (r={rho:.2f})",fontweight="bold",fontsize=6.6)
+axD.set_title(f"Kinase-driver classes: high PHLDA3, low methylation (r={rho:.2f})",fontweight="bold",fontsize=6.6)
 axD.legend(frameon=False,fontsize=5.5,loc="upper right",handletextpad=.2); axD.spines[["top","right"]].set_visible(False)
 
 for ax,l in zip([axA,axB,axC,axD],"abcd"): ns.panel_label(ax,l,x=-0.16,y=1.06,fs=10)
-fig.suptitle("Figure 3. PHLDA3 marks the aggressive driver landscape of thyroid carcinoma",fontweight="bold",fontsize=8,y=1.0)
+fig.suptitle("Figure 3. PHLDA3 marks the kinase-driver-defined landscape of thyroid carcinoma",fontweight="bold",fontsize=8,y=1.0)
 ns.save_fig(fig,"PHLDA3_THCA_Figure3")
 print("done Figure 3 (driver landscape)")
 print(d.groupby("class")[GENE].median().reindex(order).to_string())
