@@ -4,7 +4,7 @@ Reproducible code, figures and manuscript for:
 
 > **An integrated multi-omics and single-cell bioinformatics analysis identifies PHLDA3 as a BRAF-associated transcriptomic marker linked to lymph-node metastasis in thyroid carcinoma.**
 
-PHLDA3 (a p53 target / AKT repressor) is induced cell-intrinsically in malignant thyroid cells — associated with promoter hypomethylation within a BRAF^V600E^/p53-driven, immunosuppressive context — and independently correlates with lymph-node metastasis (robust to BRAF adjustment).
+PHLDA3 (a p53 target / AKT repressor) is induced cell-intrinsically in malignant thyroid cells — associated with promoter hypomethylation within a BRAF^V600E^/p53-driven, checkpoint-high immune context — and independently correlates with lymph-node metastasis (robust to BRAF adjustment).
 
 ## Repository layout
 
@@ -16,7 +16,7 @@ manuscript/   # PHLDA3_THCA_manuscript.md
 README.md · requirements.txt · .gitignore
 ```
 
-**Run scripts from the repository root**, e.g. `python3 code/volcano_thca.py` or `Rscript code/run_estimate.R`. Scripts read inputs from `data/` and write figures to `figures/`.
+**Run scripts from the repository root**, e.g. `python3 code/01_volcano.py` or `Rscript code/04_run_estimate.R`. Scripts read inputs from `data/` and write figures to `figures/`.
 
 ## Environment
 
